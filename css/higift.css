@@ -1,0 +1,51 @@
+/* Wrapper */
+#higift-wrapper {
+    display: flex;
+  }
+  
+  /* Columna Izquierda */
+  #higift-left {
+    width: 50%;
+    padding: 20px;
+  }
+  
+  /* Columna Derecha: higift-view */
+  #higift-view {
+    width: 496px;
+    height: 708px;
+    box-sizing: border-box;
+    background-size: cover; /* Para ajustar la imagen de fondo */
+  }
+  
+  #higift_view_top {
+    height: 496px;
+  }
+  
+  #higift_view_bottom {
+    height: 496px;
+    padding: 92px;
+    text-align: center;
+  }
+  
+
+
+
+
+/* Estilos para las cajas de las variantes */
+.higift-designs {
+    display: flex; /* Mostrar las cajas en línea */
+  }
+  
+  .variant-box {
+    width: 100px; /* Ancho cuadrado de la caja */
+    height: 100px; /* Alto cuadrado de la caja */
+    margin-right: 10px; /* Espacio entre las cajas */
+    overflow: hidden; /* Para asegurarse de que las imágenes no sobresalgan */
+  }
+  
+  .variant-box img {
+    width: 100%; /* Asegurarse de que la imagen ocupe todo el espacio de la caja */
+    height: 100%; /* Asegurarse de que la imagen ocupe todo el espacio de la caja */
+    object-fit: cover; /* Escalar la imagen para que encaje en la caja */
+  }
+  
