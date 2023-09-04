@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Mensajes predefinidos
-  var predefinedMessagesSelect = document.getElementById('hi_gift_predefined_messages');
+  var predefinedMessagesSelect = document.getElementById('higift_predefined_messages');
   
   if (predefinedMessagesSelect) {
     predefinedMessagesSelect.addEventListener('change', function() {

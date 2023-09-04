@@ -22,18 +22,18 @@ global $product;
 global $higift_type;
 
 
-global $hi_gift_message_1;
-global $hi_gift_message_2;
-global $hi_gift_message_3;
+global $higift_message_1;
+global $higift_message_2;
+global $higift_message_3;
 
 
 
 $product = wc_get_product(get_the_ID());
-$higift_type = get_post_meta($post->ID, 'hi_gift_type', true);
+$higift_type = get_post_meta($post->ID, 'higift_type', true);
 
-$hi_gift_message_1 = get_post_meta($post->ID, 'hi_gift_message_1', true);
-$hi_gift_message_2 = get_post_meta($post->ID, 'hi_gift_message_2', true);
-$hi_gift_message_3 = get_post_meta($post->ID, 'hi_gift_message_3', true);
+$higift_message_1 = get_post_meta($post->ID, 'higift_message_1', true);
+$higift_message_2 = get_post_meta($post->ID, 'higift_message_2', true);
+$higift_message_3 = get_post_meta($post->ID, 'higift_message_3', true);
 
 /**
  * Hook: woocommerce_before_single_product.
@@ -88,11 +88,12 @@ get_header(); // Incluir el archivo header.php de tu tema
                 function add_custom_fields_to_add_to_cart_form()
                 {
 
+                    /* Campos personalizados del producto, configurado su valor en el backend */
                     global $product;
                     global $higift_type;
-                    global $hi_gift_message_1;
-                    global $hi_gift_message_2;
-                    global $hi_gift_message_3;
+                    global $higift_message_1;
+                    global $higift_message_2;
+                    global $higift_message_3;
 
                 ?>
 
@@ -142,14 +143,14 @@ get_header(); // Incluir el archivo header.php de tu tema
 
                     <p>
                         <label>Puedes elegir un mensaje predefinido y editarlo a tu gusto:</label>
-                        <select id="hi_gift_predefined_messages" name="higift_predefined_message">
+                        <select id="higift_predefined_messages" name="higift_predefined_message">
                             <option value="">Selecciona un mensaje</option>
 
                             <?php
                             /*Generar las opciones del combobox */
-                            echo '<option value="' . esc_attr($hi_gift_message_1) . '">' . esc_html($hi_gift_message_1) . '</option>';
-                            echo '<option value="' . esc_attr($hi_gift_message_2) . '">' . esc_html($hi_gift_message_2) . '</option>';
-                            echo '<option value="' . esc_attr($hi_gift_message_3) . '">' . esc_html($hi_gift_message_3) . '</option>';
+                            echo '<option value="' . esc_attr($higift_message_1) . '">' . esc_html($higift_message_1) . '</option>';
+                            echo '<option value="' . esc_attr($higift_message_2) . '">' . esc_html($higift_message_2) . '</option>';
+                            echo '<option value="' . esc_attr($higift_message_3) . '">' . esc_html($higift_message_3) . '</option>';
                             ?>
 
                         </select>
@@ -157,16 +158,10 @@ get_header(); // Incluir el archivo header.php de tu tema
 
                     <label>Nombre de quien envía la corona/tarjeta:</label>
                     <input type="text" name="higift_sender_name" maxlength="20" required>
-
-                    
-                    
-
-
+                    <input type="text" name="higift_sender_lastname" maxlength="20" required>
                 <?php    
                 } /*cierra el hook */
                 ?>
-
-                    
 
 
                 <?php
@@ -192,24 +187,21 @@ get_header(); // Incluir el archivo header.php de tu tema
                  * @hooked woocommerce_upsell_display - 15
                  * @hooked woocommerce_output_related_products - 20
                  */
-
+                /*Por si lo necesitas (si no borrar) */
                 /* do_action( 'woocommerce_after_single_product_summary' );*/
                 ?>
 
             </div>
 
 
-
-
-
-
-
-
-
-
         </div>
     </div>
-    <!-- Columna Derecha: higift-card-wrapper (vista previa de la tarjeta)-->
+
+
+
+
+    <!---------------------------------------------------->
+    <!-- Columna Derecha: higift-card-wrapper (vista previa de la tarjeta)--------------------------------------->
     <?php include(plugin_dir_path(__FILE__) . 'higift_card_template.php'); ?>
 
     <?php if ($higift_type == 'corona_de_caridad') : ?>

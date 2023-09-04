@@ -41,19 +41,22 @@ function show_admin_notice_for_required_plugin(){
 add_action('wp_enqueue_scripts', 'enqueue_higift_styles');
 
 
-// Incluir la clase HI_Gift_Admin
+//ADMIN ---------
+// Incluir la clase higift_Admin
 include_once plugin_dir_path(__FILE__) . 'admin/class-higift-admin.php';
 
-// Instanciar la clase HI_Gift_Admin
-new HI_Gift_Admin();
+// Instanciar la clase higift_Admin
+new higift_Admin();
 
-function hi_gift_choose_template($template) {
+//FRONTEND PRODUCTO -----------
+//Aplicar el template incluido en el plugin si el producto está marcado como corona de caridad o tarjeta solidaria.
+function higift_choose_template($template) {
     global $post;
 
     if (is_singular('product')) {
-        $hi_gift_type = get_post_meta($post->ID, 'hi_gift_type', true);
+        $higift_type = get_post_meta($post->ID, 'higift_type', true);
 
-        if ($hi_gift_type == 'tarjeta_solidaria' || $hi_gift_type == 'corona_de_caridad') {
+        if ($higift_type == 'tarjeta_solidaria' || $higift_type == 'corona_de_caridad') {
             $template = plugin_dir_path(__FILE__) . 'single-product-higift.php';
         }
     }
@@ -61,12 +64,15 @@ function hi_gift_choose_template($template) {
     return $template;
 }
 
-add_filter('template_include', 'hi_gift_choose_template', 99);
+add_filter('template_include', 'higift_choose_template', 99);
 
 
-
-
-
+//-- CHECKOUT (antes de pagar)
 /*Configuración de la página de checkout */
 include_once plugin_dir_path(__FILE__) . 'inc/higift-checkout.php';
+
+
+//  Hooks del order-received
+include_once plugin_dir_path(__FILE__) . 'inc/higift-order-received.php';
+
 
