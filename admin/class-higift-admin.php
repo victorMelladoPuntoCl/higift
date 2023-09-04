@@ -39,28 +39,44 @@ public function hi_gift_tab_content() {
     );
     echo '</div>';
 
-    // Cajas de texto para mensajes personalizados
-    for ($i = 1; $i <= 3; $i++) {
-        woocommerce_wp_text_input(
-            array(
-                'id' => 'hi_gift_message_' . $i,
-                'label' => sprintf(__('Mensaje personalizado %d', 'woocommerce'), $i),
-                'desc_tip' => true,
-                'description' => __('Ingrese el mensaje personalizado.', 'woocommerce'),
-            )
-        );
-    }
+// Cajas de textarea para mensajes personalizados
+
+?>
+    <script>
+        jQuery(document).ready(function($) {
+    $('textarea[id^="hi_gift_message_"]').attr('maxlength', 200).css('height', '180px');
+});
+    </script>
+
+<?php
+
+for ($i = 1; $i <= 3; $i++) {
+    woocommerce_wp_textarea_input(
+        array(
+            'id' => 'hi_gift_message_' . $i,
+            'label' => sprintf(__('Mensaje personalizado %d', 'woocommerce'), $i),
+            'desc_tip' => true,
+            'description' => __('Ingrese el mensaje personalizado.', 'woocommerce'),
+        )
+    );
+}
+
 
     echo '</div>';
 }
-   
+
+
+/*Guardar los datos como metadatos del producto */
+
 public function save_hi_gift_fields($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
     if (isset($_POST['post_type']) && 'product' != $_POST['post_type']) return;
 
+    /*Tipo: corona o tarjeta */
     $hi_gift_type = isset($_POST['hi_gift_type']) ? wc_clean($_POST['hi_gift_type']) : '';
     update_post_meta($post_id, 'hi_gift_type', $hi_gift_type);
 
+    /*3 mensajes personalizados */
     for ($i = 1; $i <= 3; $i++) {
         $hi_gift_message = isset($_POST['hi_gift_message_' . $i]) ? wc_clean($_POST['hi_gift_message_' . $i]) : '';
         update_post_meta($post_id, 'hi_gift_message_' . $i, $hi_gift_message);
@@ -70,10 +86,12 @@ public function save_hi_gift_fields($post_id) {
 
 
 // Recuperar los valores de la pestaña "HI Gift" y establecerlos en los campos
+
 public function load_hi_gift_fields() {
     global $post;
     if ('product' != $post->post_type) return;
 
+    /* Recuperar tipo y poblar con js */
     $hi_gift_type = get_post_meta($post->ID, 'hi_gift_type', true);
     echo '<script type="text/javascript">
         jQuery(document).ready(function($) {
@@ -81,6 +99,7 @@ public function load_hi_gift_fields() {
         });
     </script>';
 
+    /* Recuperar mensajes y poblar con js */
     for ($i = 1; $i <= 3; $i++) {
         $hi_gift_message = get_post_meta($post->ID, 'hi_gift_message_' . $i, true);
         echo '<script type="text/javascript">
@@ -90,8 +109,5 @@ public function load_hi_gift_fields() {
         </script>';
     }
 }
-
-
-
 
 }

@@ -9,29 +9,28 @@
     padding: 20px;
   }
   
-  /* Columna Derecha: higift-view */
-  #higift-view {
-    width: 496px;
-    height: 708px;
-    box-sizing: border-box;
-    background-size: cover; /* Para ajustar la imagen de fondo */
-  }
-  
-  #higift_view_top {
-    height: 496px;
-  }
-  
-  #higift_view_bottom {
-    height: 496px;
-    padding: 92px;
-    text-align: center;
-  }
-  
+ #higift-form label, #higift-form input{
+  width:100%;
+ }
+
+ #higift-form input, select{
+  margin-bottom:20px;
+  max-width:100%;
+ }
+
+ textarea.largo{
+  max-width:100%;
+  resize: none; /* Permite la redimensión vertical */
+  overflow: auto; /* Agrega barras de desplazamiento cuando sea necesario */
+  max-height: 200px; 
+
+ }
 
 
 
 
 /* Estilos para las cajas de las variantes */
+
 .higift-designs {
     display: flex; /* Mostrar las cajas en línea */
   }
@@ -47,5 +46,9 @@
     width: 100%; /* Asegurarse de que la imagen ocupe todo el espacio de la caja */
     height: 100%; /* Asegurarse de que la imagen ocupe todo el espacio de la caja */
     object-fit: cover; /* Escalar la imagen para que encaje en la caja */
+  }
+
+  .selected-design {
+    border: 2px solid #0074a2; /* Seleccionada actualmente */
   }
   

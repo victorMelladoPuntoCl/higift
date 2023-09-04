@@ -1,0 +1,52 @@
+
+  /* Tarjeta CSS */
+   @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
+
+
+  #higift-view {
+    width: 496px;
+    height: 708px;
+    box-sizing: border-box;
+    background-size: cover; /* Para ajustar la imagen de fondo */
+    border: black thin solid;
+    margin: 20px 0;
+    position:fixed;
+    color: #7A341A;
+  }
+  
+  #higift_view_top {
+    height: 354px;
+  }
+  
+  #higift_view_bottom {
+    height: 354px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  #higift_view_bottom p{
+    margin:0;
+    font-style:italic;
+  }
+
+
+  /*Tipografía*/
+
+  #higift-view  #higift_view_bottom .cursiva{
+    position:relative;
+    font-family: 'Tangerine', cursive;
+    font-size:30px;
+    line-height:45px;
+  }
+
+  #higift-view .texto-sm{
+    font-size:9px;
+    line-height:9px;
+  }
+
+  #higift-view  #higift_view_bottom #higift_message_preview{
+    line-height: 30px;
+    border:rgb(189, 183, 151) thin solid;
+    padding:10px;
+
+  }
