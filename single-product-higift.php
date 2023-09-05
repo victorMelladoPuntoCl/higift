@@ -152,15 +152,20 @@ get_header(); // Incluir el archivo header.php de tu tema
                             echo '<option value="' . esc_attr($higift_message_2) . '">' . esc_html($higift_message_2) . '</option>';
                             echo '<option value="' . esc_attr($higift_message_3) . '">' . esc_html($higift_message_3) . '</option>';
                             ?>
-
                         </select>
                     </p>
 
-                    <label>Nombre de quien envía la corona/tarjeta:</label>
+                    <label>Nombre del remitente:</label>
                     <input type="text" name="higift_sender_name" maxlength="20" required>
+                    <label>Apellido del remitente:</label>
                     <input type="text" name="higift_sender_lastname" maxlength="20" required>
+
+                    <input type="hidden" name="higift_type" value="<?php echo $higift_type; ?>">
+
+                
+                
                 <?php    
-                } /*cierra el hook */
+                } /*cierra el hook ================================================ */
                 ?>
 
 
@@ -202,7 +207,7 @@ get_header(); // Incluir el archivo header.php de tu tema
 
     <!---------------------------------------------------->
     <!-- Columna Derecha: higift-card-wrapper (vista previa de la tarjeta)--------------------------------------->
-    <?php include(plugin_dir_path(__FILE__) . 'higift_card_template.php'); ?>
+    <?php include(plugin_dir_path(__FILE__) . DIRECTORY_SEPARATOR .'inc'.DIRECTORY_SEPARATOR.'higift_card_template.php'); ?>
 
     <?php if ($higift_type == 'corona_de_caridad') : ?>
         <!-- Código específico para la corona de caridad -->
