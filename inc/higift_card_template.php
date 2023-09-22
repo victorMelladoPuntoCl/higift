@@ -3,10 +3,6 @@ if (!defined('ABSPATH')) {
   exit; // Salir si se accede directamente
 }
 
-
-
-
-
 /*Estilos*/
 
 // Incrustar CSS
@@ -18,14 +14,14 @@ echo '<style type="text/css">' . $css_content . '</style>';
 
 // Incrustar imagen de fondo en el estilo si es email.
 if (isset($is_email_template) && $is_email_template) {
-  // Código PHP para cargar la imagen de fondo en el correo electrónico (ya fue incrustado como base64)
-  echo '<style>#higift-view { background-image: url("' . $base64_image . '"); }</style>';
-  echo '<style>#higift-view { position: inherit!important;); }</style>';
+  // Código PHP para cargar la imagen de fondo en el correo electrónico
+  echo '<style>#higift-view { background-image: url("' . $higift_image_url . '"); }</style>';
+  echo '<style>#higift-view { position: inherit!important;}</style>';
+
   /*El template si es llamado sin las variables, definirá valores por defecto */
-
-
   $higift_type = $higift_type ?? $item->get_meta('higift_message', true);
   $higift_message = $higift_message ?? $item->get_meta('higift_message', true);
+  echo '<style>#higift-view { background-image: url("' . $higift_image_url . '"); }</style>';
 } else {
   // Aquí podrías poner el código JavaScript para la página de configuración del producto
 }
@@ -44,7 +40,10 @@ $higift_sender_lastname = $higift_sender_lastname ?? "Apellido remitente";
   <div id="higift-view">
     
   <!--parte superior de la tarjeta-->
-    <div id="higift_view_top"></div>
+    <div id="higift_view_top" style="background-image: url(<?php $higift_image_url?>);" >
+    
+
+</div>
 
     <!--parte inferior de la tarjeta -->
     <div id="higift_view_bottom">

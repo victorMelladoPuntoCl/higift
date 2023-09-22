@@ -3,14 +3,17 @@
  * Plugin Name: higift
  * Plugin URI: https://victormellado.cl
  * Description: Plugin para vender tarjetas solidarias y coronas de caridad para "Hogar Italiano".
- * Version: 1.0
+ * Version: 1.2 - Enviador de PDFs
  * Author: Victor Mellado / ChatGPT 
  * Author URI: https://victormellado.cl
  */
 
 /* */
 define('HIGIFT_PLUGIN_DIR', plugin_dir_path(__FILE__));
-
+define('HIGIFT_PLUGIN_DIR2', dirname(__FILE__));
+define('HIGIFT_TEMPLATE_DIR', dirname(__FILE__).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR);
+define('HIGIFT_LIB_DIR', dirname(__FILE__).DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR);
+define('HIGIFT_INC_DIR', dirname(__FILE__).DIRECTORY_SEPARATOR.'inc'.DIRECTORY_SEPARATOR);
 
 /*Chequeo de prerrequisitos */
  register_activation_hook(__FILE__, 'my_plugin_activation_check');

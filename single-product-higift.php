@@ -112,9 +112,10 @@ get_header(); // Incluir el archivo header.php de tu tema
 
                         </div>
 
-
+                        
 
                         <?php endif;
+                        /*echo(HIGIFT_PLUGIN_DIR2 . DIRECTORY_SEPARATOR. 'inc'. DIRECTORY_SEPARATOR .'tcpdf'. DIRECTORY_SEPARATOR .'tcpdf.php');*/
                         ?>
 
                     <!-- PASO1 : DATOS DEL DESTINATARIO  -------------------------------------------------------->
