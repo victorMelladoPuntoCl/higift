@@ -65,15 +65,14 @@ function agregar_campos_personalizados_al_carrito($cart_item_data, $product_id, 
         $cart_item_data['higift_message'] = sanitize_text_field($_POST['higift_message']);
     }
 
-/*Obtener y guardar el ID de la imagen de la variante */
-if ($variation_id) {
-    //$variation_id se setea donde?
-
-    $image_id = get_post_thumbnail_id($variation_id);
-    if ($image_id) {
-        $cart_item_data['higift_image_id'] = $image_id;
+    if ($variation_id) {
+        $image_id = get_post_thumbnail_id($variation_id);
+        $image_info = wp_get_attachment_image_src($image_id, 'full'); 
+        $cart_item_data['higift_image_url']  = $image_info[0];  // guarda la URL en el cart item
     }
-}
+
+
+
 
     return $cart_item_data;
 }
@@ -91,6 +90,14 @@ if ($variation_id) {
 add_filter('woocommerce_get_item_data', 'mostrar_campos_personalizados_en_carrito', 10, 2);
 
 function mostrar_campos_personalizados_en_carrito($item_data, $cart_item) {
+    if (isset($cart_item['higift_type'])) {
+        $item_data[] = array(
+            'key' => 'Regalo:',
+            'value' => $cart_item['higift_type']
+        );
+    }
+
+    
     if (isset($cart_item['higift_to_name'])) {
         $item_data[] = array(
             'key' => 'Nombre del destinatario',
@@ -115,12 +122,7 @@ function mostrar_campos_personalizados_en_carrito($item_data, $cart_item) {
             'value' => $cart_item['higift_sender_lastname']
         );
     }
-    if (isset($cart_item['higift_type'])) {
-        $item_data[] = array(
-            'key' => 'Regalo:',
-            'value' => $cart_item['higift_type']
-        );
-    }
+
 
         if (isset($cart_item['higift_message'])) {
             $item_data[] = array(

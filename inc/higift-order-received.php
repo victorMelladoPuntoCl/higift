@@ -1,4 +1,8 @@
 <?php
+/*
+* Pasa los meta_data del item del carro a item del pedido.
+* 
+*/
 add_action('woocommerce_checkout_create_order_line_item', 'guardar_campos_personalizados_en_pedido', 10, 4);
 
 function guardar_campos_personalizados_en_pedido($item, $cart_item_key, $values, $order) {
@@ -19,6 +23,9 @@ function guardar_campos_personalizados_en_pedido($item, $cart_item_key, $values,
     }
     if (isset($values['higift_message'])) {
         $item->add_meta_data('higift_message', $values['higift_message']);
+    }
+    if (isset($values['higift_image_url'])) {
+        $item->add_meta_data('higift_image_url', $values['higift_image_url']);
     }
 }
 

@@ -6,7 +6,6 @@ class higift_Admin {
         add_filter('woocommerce_product_data_tabs', array($this, 'add_higift_tab'));
         add_action('woocommerce_product_data_panels', array($this, 'higift_tab_content'));
         add_action('woocommerce_process_product_meta', array($this, 'save_higift_fields'));
-        //add_action('admin_footer', array($this, 'load_higift_fields'));
         add_action('woocommerce_product_options_general_product_data', array($this, 'load_higift_fields'));
     }
 

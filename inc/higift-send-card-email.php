@@ -25,16 +25,10 @@ function enviar_email_tarjeta($order_id)
         $higift_sender_name = $item->get_meta('higift_sender_name', true);
         $higift_sender_lastname = $item->get_meta('higift_sender_lastname', true);
         $higift_type = $item->get_meta('higift_type', true);   
-        $higift_message = $item->get_meta('higift_message', true);  //NO PASA
+        $higift_message = $item->get_meta('higift_message', true);
 
+        $higift_image_url = $item->get_meta('higift_image_url',true); // Obtener los metadatos de la imagen => FALSE
 
-        /**
-        * @param int $higift_image_id ID de la imagen del item en la biblioteca de Wordpress.
-        * @param string URL de imagen: https://developer.wordpress.org/reference/functions/wp_get_attachment_metadata/
-        */
-
-        $higift_image_id = $item->get_meta('higift_image_id', true); // Recuperar el ID de la imagen NO PASA.
-        $higift_image_url = wp_get_original_image_url($higift_image_id); // Obtener los metadatos de la imagen => FALSE
 
         //Comprobación de ruta. Uso de imagen default si no aparece.
         if ($higift_image_url){
