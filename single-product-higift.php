@@ -18,15 +18,15 @@
 
 defined('ABSPATH') || exit; /*Por seguridad*/
 
+// Globales para un higift
 global $product;
 global $higift_type;
-
 
 global $higift_message_1;
 global $higift_message_2;
 global $higift_message_3;
 
-
+global $higift_message;
 
 $product = wc_get_product(get_the_ID());
 $higift_type = get_post_meta($post->ID, 'higift_type', true);
@@ -34,6 +34,8 @@ $higift_type = get_post_meta($post->ID, 'higift_type', true);
 $higift_message_1 = get_post_meta($post->ID, 'higift_message_1', true);
 $higift_message_2 = get_post_meta($post->ID, 'higift_message_2', true);
 $higift_message_3 = get_post_meta($post->ID, 'higift_message_3', true);
+
+
 
 /**
  * Hook: woocommerce_before_single_product.
@@ -62,41 +64,25 @@ get_header(); // Incluir el archivo header.php de tu tema
 
     <div id="higift-left">
         <div id="higift-left-container">
-
-
-            <?php
-            /** Desactivar el hook que muestra las imagnees del producto por default.
-             * 
-             * Hook: woocommerce_before_single_product_summary.
-             *
-             * @hooked woocommerce_show_product_sale_flash - 10
-             * @hooked woocommerce_show_product_images - 20
-             */
-            /*do_action( 'woocommerce_before_single_product_summary' );*/
-
-            ?>
-
-
             <div class="summary entry-summary">
 
                 <?php
+                /*
+                * Añadir campos personalizados antes del botón "Añadir al carrito"
+                * Dentro del FORM.
+                */
 
-
-                // Añadir campos personalizados antes del botón "Añadir al carrito"
                 add_action('woocommerce_before_add_to_cart_button', 'add_custom_fields_to_add_to_cart_form');
 
                 function add_custom_fields_to_add_to_cart_form()
                 {
-
                     /* Campos personalizados del producto, configurado su valor en el backend */
                     global $product;
                     global $higift_type;
                     global $higift_message_1;
                     global $higift_message_2;
                     global $higift_message_3;
-
                 ?>
-
 
                         <!-- Paso 3: Escoge un diseño (solo para productos variables) -->
                         <?php if ($product->is_type('variable')) : ?>
@@ -128,19 +114,17 @@ get_header(); // Incluir el archivo header.php de tu tema
 
                         <label>Email al que se enviará la tarjeta:</label>
                         <input type="email" name="higift_to_email" required>
-                   
-
+  
                     <!-- Paso 2: Contenido de la Tarjeta/Corona -->
-
 
                     <?php if ($higift_type == 'corona_de_caridad') : ?>
                         <label>Nombre del difunto:</label>
-                        <input type="text" name="higift_other_name">
+                        <input type="text" name="higift_other_name" required>
                     <?php endif; ?>
 
                     <label>Mensaje (Hasta 200 caracteres):</label>
                     <!--<input type="text" name="higift_message" maxlength="200" required class="largo">-->
-                    <textarea name="higift_message" rows="4" required class="largo" maxlength="200"></textarea>
+                    <textarea name="higift_message" rows="4" required class="largo" maxlength="200" required></textarea>
 
                     <p>
                         <label>Puedes elegir un mensaje predefinido y editarlo a tu gusto:</label>
@@ -162,13 +146,10 @@ get_header(); // Incluir el archivo header.php de tu tema
                     <input type="text" name="higift_sender_lastname" maxlength="20" required>
 
                     <input type="hidden" name="higift_type" value="<?php echo $higift_type; ?>">
-
-                
-                
+             
                 <?php    
                 } /*cierra el hook ================================================ */
                 ?>
-
 
                 <?php
                 /**

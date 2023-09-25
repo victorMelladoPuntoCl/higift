@@ -1,6 +1,7 @@
 <?php
 /**
-*Generar pdf utilizando la librería TCPDF (/lib/tcpdf) 
+* Generar pdf utilizando la librería TCPDF (/lib/tcpdf)
+* Llamado desde higift-send-card-email.php
 */
 
 // Incluir la biblioteca TCPDF

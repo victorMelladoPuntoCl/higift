@@ -37,8 +37,6 @@ function show_admin_notice_for_required_plugin(){
     }
 }
 
-
-
  function enqueue_higift_styles() {
     wp_enqueue_style('higift-css', plugin_dir_url(__FILE__) . 'css/higift.css');
 }

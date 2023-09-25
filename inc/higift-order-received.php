@@ -17,5 +17,8 @@ function guardar_campos_personalizados_en_pedido($item, $cart_item_key, $values,
     if (isset($values['higift_type'])) {
         $item->add_meta_data('higift_type', $values['higift_type']);
     }
+    if (isset($values['higift_message'])) {
+        $item->add_meta_data('higift_message', $values['higift_message']);
+    }
 }
 

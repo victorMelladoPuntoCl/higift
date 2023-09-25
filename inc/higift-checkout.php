@@ -39,8 +39,10 @@ function custom_text_strings($translated_text, $text, $domain)
 }
 
 
-/* GUARDAR El itemcart */
-/*Agregar los datos al objeto carrito */
+/* GUARDAR los datos del formulario en el cart item */
+/*Agregar los datos al OBJETO del item del carrito */
+
+add_filter('woocommerce_add_cart_item_data', 'agregar_campos_personalizados_al_carrito', 10, 3);
 
 function agregar_campos_personalizados_al_carrito($cart_item_data, $product_id, $variation_id)
 {
@@ -65,6 +67,8 @@ function agregar_campos_personalizados_al_carrito($cart_item_data, $product_id, 
 
 /*Obtener y guardar el ID de la imagen de la variante */
 if ($variation_id) {
+    //$variation_id se setea donde?
+
     $image_id = get_post_thumbnail_id($variation_id);
     if ($image_id) {
         $cart_item_data['higift_image_id'] = $image_id;
@@ -74,14 +78,19 @@ if ($variation_id) {
     return $cart_item_data;
 }
 
-add_filter('woocommerce_add_cart_item_data', 'agregar_campos_personalizados_al_carrito', 10, 3);
 
 
-// MOSTRAR los datos de del producto en el carrito (nombre, mensaje, etc) en la página de checkout (carrito)
+
+/* 
+* RECUPERAR los datos personalizados del itemcart.
+* Usar un FILTER al obtener los items del carrito y añadirle un campo personalizado
+* Los datos se obtienen desde el POST.
+*/
 
 
-function mostrar_campos_personalizados_en_carrito($item_data, $cart_item)
-{
+add_filter('woocommerce_get_item_data', 'mostrar_campos_personalizados_en_carrito', 10, 2);
+
+function mostrar_campos_personalizados_en_carrito($item_data, $cart_item) {
     if (isset($cart_item['higift_to_name'])) {
         $item_data[] = array(
             'key' => 'Nombre del destinatario',
@@ -112,6 +121,14 @@ function mostrar_campos_personalizados_en_carrito($item_data, $cart_item)
             'value' => $cart_item['higift_type']
         );
     }
+
+        if (isset($cart_item['higift_message'])) {
+            $item_data[] = array(
+                'key' => 'Mensaje:',
+                'value' => $cart_item['higift_message']
+            );
+    }
     return $item_data;
 }
-add_filter('woocommerce_get_item_data', 'mostrar_campos_personalizados_en_carrito', 10, 2);
+
+
