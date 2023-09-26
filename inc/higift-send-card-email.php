@@ -4,7 +4,7 @@
 * Se ejecuta con el HOOK woocommerce_order_status_completed
 * HOOK
 */
-add_action('woocommerce_order_status_completed', 'higift_send_card_email', 10, 1);
+add_action('woocommerce_order_status_processing', 'higift_send_card_email', 10, 1);
 
 function higift_send_card_email($order_id)
 {
@@ -62,13 +62,14 @@ function higift_send_card_email($order_id)
         * y todos los datos de header necesarios.
         */
     
-
+        $email_pre_content='<p>Hola, ¿cómo estás?</p>'.$higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type.' con un mensaje. <br> La tarjeta se encuentra en este correo adjunta como archivo PDF, en caso de que no puedas verla directamente aquí.';
+        $email_html_content = $email_pre_content . $html_content; 
         
        // Guardar el HTML en un archivo de registro (log.txt)
             $logFile = HIGIFT_PLUGIN_DIR . 'log.txt';
-            file_put_contents($logFile, $html_content);   
+            file_put_contents($logFile, $email_html_content);   
 
-        $subject = $higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado un saludo especial';
+        $subject = $higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type;
         $to = $higift_to_email;
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',
@@ -81,6 +82,6 @@ function higift_send_card_email($order_id)
         $attachments = array($pdfFilePath);   // Adjuntar el PDF al correo electrónico
 
         // Envía el correo electrónico con el PDF adjunto
-        wp_mail($to, $subject, $html_content, $headers, $attachments);
+        wp_mail($to, $subject, $email_html_content, $headers, $attachments);
     }
 }
