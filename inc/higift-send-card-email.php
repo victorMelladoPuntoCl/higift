@@ -70,12 +70,12 @@ function higift_send_card_email($order_id)
             file_put_contents($logFile, $email_html_content);   
 
         $subject = $higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type;
-        $to = $higift_to_email;
+        $to = $higift_to_email.',Soporte Hogar Italiano <soporte@hogaritaliano.cl>';
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',
             'From: Tarjetas y coronas Hogar Italiano <soporte@hogaritaliano.cl>',
             'Reply-To: Soporte Hogar Italiano <soporte@hogaritaliano.cl>',
-            'BCC: contacto+higift@victormellado.cl, soporte+pdf@hogaritaliano.cl', // Añadir direcciones BCC aquí separadas por coma
+            'BCC: Soporte Dev <contacto@victormellado.cl>, Soporte Hita <soporte@hogaritaliano.cl>', // Añadir direcciones BCC aquí separadas por coma
             // Puedes añadir más campos de encabezado aquí
         );
 
