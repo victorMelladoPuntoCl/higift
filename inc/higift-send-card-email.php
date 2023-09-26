@@ -62,15 +62,24 @@ function higift_send_card_email($order_id)
         * y todos los datos de header necesarios.
         */
     
-        $email_pre_content='<p>Hola, ¿cómo estás?</p>'.$higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type.' con un mensaje. <br> La tarjeta se encuentra en este correo adjunta como archivo PDF, en caso de que no puedas verla directamente aquí.';
-        $email_html_content = $email_pre_content . $html_content; 
+        // En este include va la definición de las funciones addEmailContentBefore y... after.
+
+        include(HIGIFT_TEMPLATE_DIR. DIRECTORY_SEPARATOR.'higift_email_template.php');
+        $email_pre_content = addEmailContentBefore($higift_to_name, $higift_sender_name, $higift_sender_lastname, $readable_higift_type);
+        $email_after_content = addEmailContentAfter();
+
+        $email_html_content = $email_pre_content . $html_content . $email_after_content;
         
        // Guardar el HTML en un archivo de registro (log.txt)
             $logFile = HIGIFT_PLUGIN_DIR . 'log.txt';
             file_put_contents($logFile, $email_html_content);   
 
-        $subject = $higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type;
+        
+        
+        //Nota: Es posible que $to y $subject sobreescribirán cualquier valor que se ingrese en $headers.
+        
         $to = $higift_to_email.',Soporte Hogar Italiano <soporte@hogaritaliano.cl>';
+        $subject = $higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type;
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',
             'From: Tarjetas y coronas Hogar Italiano <soporte@hogaritaliano.cl>',

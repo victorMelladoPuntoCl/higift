@@ -1,4 +1,9 @@
 <?php
+/*
+Customizaciones para WNP Name Your Price 
+*/
+
+
 add_action( 'woocommerce_before_add_to_cart_button', 'vk7k_hi_wc_donation' );
 
 /**
@@ -71,7 +76,7 @@ function vk7k_hi_wc_donation(){
 					<input type="radio" name="color" value="30000" onclick="syncToWoonp(this);"> $ 30.000
 				</label>
 				<label>
-					<input type="radio" name="color" value="40000" onclick="syncToWoonp(this);"> 40.000
+					<input type="radio" name="color" value="40000" onclick="syncToWoonp(this);"> Otro
 				</label>
 			</div>
 		</fieldset>
@@ -108,7 +113,7 @@ function wpshout_action_example() {
 			f = document.querySelector(".woonp-overwrite");
 			
 
-			if(origen.value=="2000"){
+			if(origen.value=="40000"){
 				f.style.opacity=1;
 				xfx = document.querySelector('.woonp-input');
 				xfx.focus();

@@ -17,6 +17,7 @@
  */
 
 defined('ABSPATH') || exit; /*Por seguridad*/
+include_once plugin_dir_path(__FILE__) . 'inc/wnp-customizations.php';
 
 // Globales para un higift
 global $product;
