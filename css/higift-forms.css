@@ -1,0 +1,52 @@
+/*
+* Estilos para los forms (principalmente en single-product)
+*/
+.variations, .input-text.qty.text {
+    display: none;
+}
+
+.higift-designs {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #333;
+    border-radius: 3px;
+}
+
+.form-group label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #007710;
+    line-height: 20px;
+}
+
+.form-group input,
+.form-group textarea,
+#higift_message {
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
+    border: thin solid #333;
+    background-color: #fff;
+    color: #333;
+}
+
+.woocommerce_page .form-group input[type="text"]:focus, .woocommerce_page .form-group textarea:focus, #higift_message:focus{
+    outline: 2px green solid;
+    transition: all 1s ease-out;
+}
+
+*, *:focus{
+    transition: all 1s ease-out;
+}
+
+.single_add_to_cart_button.button.alt{
+    width:100%;
+    background-color:green;
+}

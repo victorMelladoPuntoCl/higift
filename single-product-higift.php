@@ -35,8 +35,6 @@ $higift_message_1 = get_post_meta($post->ID, 'higift_message_1', true);
 $higift_message_2 = get_post_meta($post->ID, 'higift_message_2', true);
 $higift_message_3 = get_post_meta($post->ID, 'higift_message_3', true);
 
-
-
 /**
  * Hook: woocommerce_before_single_product.
  *
@@ -49,18 +47,25 @@ if (post_password_required()) {
     return;
 }
 
-function enqueue_higift_scripts() {
+function enqueue_higift_scripts()
+{
     wp_enqueue_script('higift-js', plugin_dir_url(__FILE__) . 'js/higift-preview.js', array('jquery'), null, true);
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_higift_scripts');
+
+// Enqueue the style
+function higift_enqueue_styles() {
+    wp_enqueue_style( 'higift-forms-styles', plugin_dir_url( __FILE__ ) . '/css/higift-forms.css', array(), '1.0.0', 'all' );
+  }
+  add_action( 'wp_enqueue_scripts', 'higift_enqueue_styles' );
+  
 
 get_header(); // Incluir el archivo header.php de tu tema
 ?>
 
 <div id="higift-wrapper">
     <!-- Columna Izquierda -->
-
 
     <div id="higift-left">
         <div id="higift-left-container">
@@ -84,9 +89,13 @@ get_header(); // Incluir el archivo header.php de tu tema
                     global $higift_message_3;
                 ?>
 
-                        <!-- Paso 3: Escoge un diseño (solo para productos variables) -->
-                        <?php if ($product->is_type('variable')) : ?>
-                        <style></style>
+                    <!-- Paso 3: Escoge un diseño (solo para productos variables) -->
+                    <?php if ($product->is_type('variable')) : ?>
+                        <style>
+                            .higift-designs {
+                                border: #555 solid thin;
+                            }
+                        </style>
                         <h2>Escoge un diseño:</h2>
                         <div class="higift-designs">
 
@@ -98,61 +107,78 @@ get_header(); // Incluir el archivo header.php de tu tema
 
                         </div>
 
-                        
 
-                        <?php endif;
-                        /*echo(HIGIFT_PLUGIN_DIR2 . DIRECTORY_SEPARATOR. 'inc'. DIRECTORY_SEPARATOR .'tcpdf'. DIRECTORY_SEPARATOR .'tcpdf.php');*/
-                        ?>
+
+                    <?php endif;
+                    /*echo(HIGIFT_PLUGIN_DIR2 . DIRECTORY_SEPARATOR. 'inc'. DIRECTORY_SEPARATOR .'tcpdf'. DIRECTORY_SEPARATOR .'tcpdf.php');*/
+                    ?>
 
                     <!-- PASO1 : DATOS DEL DESTINATARIO  -------------------------------------------------------->
-                    
-                    <h2>Contenido y datos de la <?php echo $higift_type == 'corona_de_caridad' ? 'corona de caridad' : 'tarjeta solidaria'; ?></h2>
+                    <div id="higift-paso2">
+                        <h2>Contenido y datos de la <?php echo $higift_type == 'corona_de_caridad' ? 'corona de caridad' : 'tarjeta solidaria'; ?></h2>
 
-                        <h3>Datos para el envío de la tarjeta. </h3>
-                        <label>Deudo o familia a quien se envía:</label>
-                        <input type="text" name="higift_to_name" required>
+                        <h3>Paso 1: Datos para el envío de la <?php echo $higift_type == 'corona_de_caridad' ? 'corona de caridad' : 'tarjeta solidaria'; ?></h3>
 
-                        <label>Email al que se enviará la tarjeta:</label>
-                        <input type="email" name="higift_to_email" required>
-  
-                    <!-- Paso 2: Contenido de la Tarjeta/Corona -->
+                        <div class="form-group">
+                            <label for="higift_to_name">Deudo(s):</label>
+                            <input type="text" name="higift_to_name" id="higift_to_name" required placeholder="Nombre del deudo, familia, institución, agrupación etc.">
 
-                    <?php if ($higift_type == 'corona_de_caridad') : ?>
-                        <label>Nombre del difunto:</label>
-                        <input type="text" name="higift_other_name" required>
-                    <?php endif; ?>
+                            <label for="higift_to_email">Email al que se enviará la tarjeta:</label>
+                            <input type="email" id="higift_to_email" name="higift_to_email" required placeholder="destinatario@ejemplo.com">
+                        </div>
 
-                    <label>Mensaje (Hasta 200 caracteres):</label>
-                    <!--<input type="text" name="higift_message" maxlength="200" required class="largo">-->
-                    <textarea name="higift_message" rows="4" required class="largo" maxlength="200" required></textarea>
+                        <!-- PASO2: Contenido de la Tarjeta/Corona -->
 
-                    <p>
-                        <label>Puedes elegir un mensaje predefinido y editarlo a tu gusto:</label>
-                        <select id="higift_predefined_messages" name="higift_predefined_message">
-                            <option value="">Selecciona un mensaje</option>
+                        <h3>Paso 2: Texto en la tarjeta </h3>
 
-                            <?php
-                            /*Generar las opciones del combobox */
-                            echo '<option value="' . esc_attr($higift_message_1) . '">' . esc_html($higift_message_1) . '</option>';
-                            echo '<option value="' . esc_attr($higift_message_2) . '">' . esc_html($higift_message_2) . '</option>';
-                            echo '<option value="' . esc_attr($higift_message_3) . '">' . esc_html($higift_message_3) . '</option>';
-                            ?>
-                        </select>
-                    </p>
+                        <?php if ($higift_type == 'corona_de_caridad') : ?>
+                            <div class="form-group">
+                                <label for="higift_other_name">Nombre del difunto:</label>
+                                <input type="text" name="higift_other_name" id="higift_other_name" required placeholder="Nombre completo, nombre, apodo cariñoso.">
 
-                    <label>Nombre del remitente:</label>
-                    <input type="text" name="higift_sender_name" maxlength="20" required>
-                    <label>Apellido del remitente:</label>
-                    <input type="text" name="higift_sender_lastname" maxlength="20" required>
 
-                    <input type="hidden" name="higift_type" value="<?php echo $higift_type; ?>">
-             
-                <?php    
+                            <?php endif; ?>
+
+                            <br>
+                            <label for="higift_message">Mensaje (Hasta 200 caracteres):</label>
+                            <!--<input type="text" name="higift_message" maxlength="200" required class="largo">-->
+                            <textarea id="higift_message" name="higift_message" rows="4" required class="largo" maxlength="200" required></textarea>
+
+                            <label for="higift_predefined_messages">Ideas de mensajes:</label>
+                            <p>Puedes elegir un mensaje predefinido y editarlo a tu gusto </p>
+                            <select id="higift_predefined_messages" name="higift_predefined_message">
+                                <option value="">Ideas de mensaje (se borra lo que ya hayas escrito)</option>
+
+                                <?php
+                                /*Generar las opciones del combobox */
+                                echo '<option value="' . esc_attr($higift_message_1) . '">' . esc_html($higift_message_1) . '</option>';
+                                echo '<option value="' . esc_attr($higift_message_2) . '">' . esc_html($higift_message_2) . '</option>';
+                                echo '<option value="' . esc_attr($higift_message_3) . '">' . esc_html($higift_message_3) . '</option>';
+                                ?>
+                            </select>
+
+                            </div>
+                    </div>
+                    <div>
+                        <h2>Datos del remitente</h2>
+                        <div class="form-group">
+                        <p>Estos son los datos que se mostrarán en la tarjeta y en el email</p>
+                        <label for="higift_sender_name">Nombre del remitente:</label>
+                        <input id="higift_sender_name" type="text" name="higift_sender_name" maxlength="20" required>
+                        
+                        <label for="higift_sender_lastname">Apellido del remitente:</label>
+                        <input type="text" name="higift_sender_lastname" maxlength="20" required>
+
+                        <input type="hidden" name="higift_type" value="<?php echo $higift_type; ?>">
+                        </div>
+                    </div>
+
+                <?php
                 } /*cierra el hook ================================================ */
                 ?>
 
                 <?php
-                    do_action('woocommerce_single_product_summary');
+                do_action('woocommerce_single_product_summary');
                 ?>
 
             </div>
@@ -165,7 +191,7 @@ get_header(); // Incluir el archivo header.php de tu tema
 
     <!---------------------------------------------------->
     <!-- Columna Derecha: higift-card-wrapper (vista previa de la tarjeta)--------------------------------------->
-    <?php include(plugin_dir_path(__FILE__) . DIRECTORY_SEPARATOR .'inc'.DIRECTORY_SEPARATOR.'higift_card_template.php'); ?>
+    <?php include(HIGIFT_TEMPLATE_DIR . 'higift_card_template.php'); ?>
 
     <?php if ($higift_type == 'corona_de_caridad') : ?>
         <!-- Código específico para la corona de caridad -->

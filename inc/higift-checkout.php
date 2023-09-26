@@ -46,32 +46,51 @@ add_filter('woocommerce_add_cart_item_data', 'agregar_campos_personalizados_al_c
 
 function agregar_campos_personalizados_al_carrito($cart_item_data, $product_id, $variation_id)
 {
+    $higift_item_data = array();
+
     if (isset($_POST['higift_to_name'])) {
         $cart_item_data['higift_to_name'] = sanitize_text_field($_POST['higift_to_name']);
+        $higift_item_data['to_name'] = $cart_item_data['higift_to_name'];
     }
     if (isset($_POST['higift_to_email'])) {
         $cart_item_data['higift_to_email'] = sanitize_email($_POST['higift_to_email']);
+        $higift_item_data['to_email'] = $cart_item_data['higift_to_email'];
     }
     if (isset($_POST['higift_sender_name'])) {
         $cart_item_data['higift_sender_name'] = sanitize_text_field($_POST['higift_sender_name']);
+        $higift_item_data['sender_email'] = $cart_item_data['higift_sender_name'];
     }
     if (isset($_POST['higift_sender_lastname'])) {
         $cart_item_data['higift_sender_lastname'] = sanitize_text_field($_POST['higift_sender_lastname']);
+        $higift_item_data['sender_lastname'] = sanitize_text_field($_POST['higift_sender_lastname']);
     }
     if (isset($_POST['higift_type'])) {
         $cart_item_data['higift_type'] = sanitize_text_field($_POST['higift_type']);
+        $higift_item_data['higift_type'] = sanitize_text_field($_POST['higift_type']);
     }
     if (isset($_POST['higift_message'])) {
         $cart_item_data['higift_message'] = sanitize_text_field($_POST['higift_message']);
+        $higift_item_data['message'] = sanitize_text_field($_POST['higift_message']);
     }
+    if (isset($_POST['higift_other_name'])) {
+        $cart_item_data['higift_other_name'] = sanitize_text_field($_POST['higift_other_name']);
+        $higift_item_data['other_name'] = sanitize_text_field($_POST['higift_other_name']);
+    }
+
 
     if ($variation_id) {
         $image_id = get_post_thumbnail_id($variation_id);
         $image_info = wp_get_attachment_image_src($image_id, 'full'); 
+        
         $cart_item_data['higift_image_url']  = $image_info[0];  // guarda la URL en el cart item
+        $higift_item_data['image_url']  = $image_info[0];  // guarda la URL en el cart item
+        
+        $cart_item_data['higift_image_local_dir'] = get_attached_file($image_id);
+        $higift_item_data['image_local_dir'] = get_attached_file($image_id);
     }
 
-
+        // Guardar el arreglo $higift
+        $cart_item_data['higift_item_data']  = $higift_item_data; 
 
 
     return $cart_item_data;
