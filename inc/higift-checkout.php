@@ -7,7 +7,6 @@ function add_custom_css()
 }
 add_action('woocommerce_before_checkout_form', 'add_custom_css');
 
-
 /*Siempre marcado el ship_to_different_address*/
 add_filter('woocommerce_ship_to_different_address_checked', '__return_true');
 
@@ -98,13 +97,11 @@ function agregar_campos_personalizados_al_carrito($cart_item_data, $product_id, 
 
 
 
-
 /* 
 * RECUPERAR los datos personalizados del itemcart.
 * Usar un FILTER al obtener los items del carrito y añadirle un campo personalizado
 * Los datos se obtienen desde el POST.
 */
-
 
 add_filter('woocommerce_get_item_data', 'mostrar_campos_personalizados_en_carrito', 10, 2);
 

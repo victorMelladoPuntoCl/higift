@@ -39,11 +39,11 @@
 
 .woocommerce_page .form-group input[type="text"]:focus, .woocommerce_page .form-group textarea:focus, #higift_message:focus{
     outline: 2px green solid;
-    transition: all 1s ease-out;
+    transition: all 0.5s ease-out;
 }
 
 *, *:focus{
-    transition: all 1s ease-out;
+    transition: all 0.5s ease-out;
 }
 
 .single_add_to_cart_button.button.alt{

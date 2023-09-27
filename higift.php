@@ -3,7 +3,7 @@
  * Plugin Name: higift
  * Plugin URI: https://victormellado.cl
  * Description: Plugin para vender tarjetas solidarias y coronas de caridad para "Hogar Italiano".
- * Version: 1.3 - Enviador de PDFs
+ * Version: 1.31
  * Author: Victor Mellado 
  * Author URI: https://victormellado.cl
  */
@@ -43,14 +43,14 @@ function show_admin_notice_for_required_plugin(){
 
 add_action('wp_enqueue_scripts', 'enqueue_higift_styles');
 
+//INCLUDES -----------------
 
-//INCLUDESS -----------------
 // clase higift_Admin:
 include_once plugin_dir_path(__FILE__) . 'admin/class-higift-admin.php';
 // Instanciar la clase higift_Admin
 new higift_Admin();
 
-/*Configuración de la página de checkout */
+/*funciones y hooks de la página de checkout */
 include_once plugin_dir_path(__FILE__) . 'inc/higift-checkout.php';
 
 //  Hooks del order-received
@@ -59,6 +59,12 @@ include_once plugin_dir_path(__FILE__) . 'inc/higift-order-received.php';
 
 //  Envío de la tarjeta vía email.
 include_once plugin_dir_path(__FILE__) . 'inc/higift-send-card-email.php';
+
+//  Bloqueo de método cod para usuarios sin login
+include_once plugin_dir_path(__FILE__) . 'inc/higift-cod-switch.php';
+
+
+
 
 
 

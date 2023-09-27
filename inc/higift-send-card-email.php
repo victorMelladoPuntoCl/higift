@@ -78,7 +78,7 @@ function higift_send_card_email($order_id)
         
         //Nota: Es posible que $to y $subject sobreescribirán cualquier valor que se ingrese en $headers.
         
-        $to = $higift_to_email.',Soporte Hogar Italiano <soporte@hogaritaliano.cl>';
+        $to = $higift_to_name.'<'.$higift_to_email.'>,Soporte Hogar Italiano <soporte@hogaritaliano.cl>';
         $subject = $higift_sender_name . ' ' . $higift_sender_lastname . ' te ha enviado una '.$readable_higift_type;
         $headers = array(
             'Content-Type: text/html; charset=UTF-8',

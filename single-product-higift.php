@@ -17,7 +17,7 @@
  */
 
 defined('ABSPATH') || exit; /*Por seguridad*/
-include_once plugin_dir_path(__FILE__) . 'inc/wnp-customizations.php';
+
 
 // Globales para un higift
 global $product;
@@ -56,11 +56,12 @@ function enqueue_higift_scripts()
 add_action('wp_enqueue_scripts', 'enqueue_higift_scripts');
 
 // Enqueue the style
-function higift_enqueue_styles() {
-    wp_enqueue_style( 'higift-forms-styles', plugin_dir_url( __FILE__ ) . '/css/higift-forms.css', array(), '1.0.0', 'all' );
-  }
-  add_action( 'wp_enqueue_scripts', 'higift_enqueue_styles' );
-  
+function higift_enqueue_styles()
+{
+    wp_enqueue_style('higift-forms-styles', plugin_dir_url(__FILE__) . '/css/higift-forms.css', array(), '1.0.0', 'all');
+}
+add_action('wp_enqueue_scripts', 'higift_enqueue_styles');
+
 
 get_header(); // Incluir el archivo header.php de tu tema
 ?>
@@ -78,7 +79,11 @@ get_header(); // Incluir el archivo header.php de tu tema
                 * Dentro del FORM.
                 */
 
+                // Personalización de WNP
                 add_action('woocommerce_before_add_to_cart_button', 'add_custom_fields_to_add_to_cart_form');
+
+                include_once plugin_dir_path(__FILE__) . 'inc/wnp-customizations.php';
+                add_action('woocommerce_before_add_to_cart_button', 'vk7k_hi_wc_donation');
 
                 function add_custom_fields_to_add_to_cart_form()
                 {
@@ -163,14 +168,14 @@ get_header(); // Incluir el archivo header.php de tu tema
                     <div>
                         <h2>Datos del remitente</h2>
                         <div class="form-group">
-                        <p>Estos son los datos que se mostrarán en la tarjeta y en el email</p>
-                        <label for="higift_sender_name">Nombre del remitente:</label>
-                        <input id="higift_sender_name" type="text" name="higift_sender_name" maxlength="20" required>
-                        
-                        <label for="higift_sender_lastname">Apellido del remitente:</label>
-                        <input type="text" name="higift_sender_lastname" maxlength="20" required>
+                            <p>Estos son los datos que se mostrarán en la tarjeta y en el email</p>
+                            <label for="higift_sender_name">Nombre del remitente:</label>
+                            <input id="higift_sender_name" type="text" name="higift_sender_name" maxlength="20" required>
 
-                        <input type="hidden" name="higift_type" value="<?php echo $higift_type; ?>">
+                            <label for="higift_sender_lastname">Apellido del remitente:</label>
+                            <input type="text" name="higift_sender_lastname" maxlength="20" required>
+
+                            <input type="hidden" name="higift_type" value="<?php echo $higift_type; ?>">
                         </div>
                     </div>
 
@@ -193,6 +198,15 @@ get_header(); // Incluir el archivo header.php de tu tema
     <!---------------------------------------------------->
     <!-- Columna Derecha: higift-card-wrapper (vista previa de la tarjeta)--------------------------------------->
     <?php include(HIGIFT_TEMPLATE_DIR . 'higift_card_template.php'); ?>
+
+    <script>
+            // Obtén el elemento con el id #higift-view
+            var higiftView = document.getElementById('higift-view');
+
+            // Agrega la clase .fixed al elemento
+            higiftView.classList.add('fixed');
+
+    </script>
 
     <?php if ($higift_type == 'corona_de_caridad') : ?>
         <!-- Código específico para la corona de caridad -->

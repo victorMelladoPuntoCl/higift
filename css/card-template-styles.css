@@ -11,8 +11,12 @@
     background-size: cover; /* Para ajustar la imagen de fondo */
     border: black thin solid;
     margin: 20px auto 0 auto;
-    position:fixed;
     color: #7A341A;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  #higift-view.fixed{
+    position:fixed!important;
   }
   
   #higift_view_top {
