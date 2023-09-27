@@ -50,3 +50,11 @@
     width:100%;
     background-color:green;
 }
+
+.single_add_to_cart_button.button.alt {
+	border: green thin solid !important;
+	color: white !important;
+	background-color: green !important;
+	height: 120px;
+	font-size: 30px;
+}
