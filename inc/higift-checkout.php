@@ -103,6 +103,18 @@ function agregar_campos_personalizados_al_carrito($cart_item_data, $product_id, 
 * Los datos se obtienen desde el POST.
 */
 
+// Función para vaciar el carrito antes de agregar un nuevo producto
+function vaciar_carrito_al_agregar_producto($cart_item_data, $product_id) {
+    // Vacía todo el contenido del carrito
+    WC()->cart->empty_cart();
+    
+    // Retorna los datos del producto actual para agregarlo al carrito
+    return $cart_item_data;
+}
+
+// Agrega el gancho al evento de agregar producto al carrito
+add_filter('woocommerce_add_cart_item_data', 'vaciar_carrito_al_agregar_producto', 10, 2);
+
 add_filter('woocommerce_get_item_data', 'mostrar_campos_personalizados_en_carrito', 10, 2);
 
 function mostrar_campos_personalizados_en_carrito($item_data, $cart_item) {

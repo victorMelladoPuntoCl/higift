@@ -4,17 +4,17 @@
         <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Corona De Caridad para Familia Mefistófenes </title>
+        <title>Corona De Caridad para Familia Presley </title>
     </head>
     <body>
-    Hola Familia Mefistófenes, ¿cómo estás?<br>
-    Andrés Mellado te ha enviado una Corona De Caridad con un mensaje. <br>
+    Hola Familia Presley, ¿cómo estás?<br>
+    Víctor Mellado te ha enviado una Corona De Caridad con un mensaje. <br>
     La tarjeta se encuentra en este correo adjunta como archivo PDF, en caso de que no puedas verla directamente aquí.
 
 <head>
   <style>
     #higift-view {
-      background-image: url(http://hogaritaliano.local/wp-content/uploads/2023/09/corona_tulipan-scaled.jpg);
+      background-image: url(http://hogaritaliano.local/wp-content/uploads/2023/09/corona_mariposa-scaled.jpg);
       background-position: top center;
       background-repeat: no-repeat;
     }
@@ -32,6 +32,11 @@
     border: black thin solid;
     margin: 20px auto 0 auto;
     color: #7A341A;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  #higift-view.fixed{
+    position:fixed!important;
   }
   
   #higift_view_top {
@@ -90,8 +95,8 @@
                   <div style="text-align: center;">
             <p class="texto-sm">Hogar Italiano ha recibido una Corona de Caridad:</p>
             <p>En memoria de: </p>
-            <p id="higift_other_name_preview" class="cursiva">Familia Mefistófenes</p>
-            <p id="higift_message_preview">Mi cuerpo muere no mi Alma, mi cariño y mi sonrisa los acompañarán desde el Cielo, donde pediré por ustedes.</p>
+            <p id="higift_other_name_preview" class="cursiva">Familia Presley</p>
+            <p id="higift_message_preview">Mi cuerpo muere no mi Alma, mi cariño y mi sonrisa los acompañarán desde el Cielo, donde pediré por ustedes. lkjlkj</p>
             <p>Enviada por:
             <p>
               <span id="higift_sender_name_preview" class="cursiva">Nombre del remitente
