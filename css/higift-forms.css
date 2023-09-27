@@ -51,7 +51,7 @@
     background-color:green;
 }
 
-.single_add_to_cart_button.button.alt {
+.single_add_to_cart_button.button {
 	border: green thin solid !important;
 	color: white !important;
 	background-color: green !important;

@@ -23,7 +23,6 @@ $higift_ahoradir = (__DIR__); // "C:\Users\conta\Local Sites\hogaritaliano\app\p
 */
 
 $higift_to_name = $higift_to_name ?? "Nombre";
-$higift_other_name = $higift_to_name ?? "Nombre del ser querido";
 $higift_to_email = $higift_to_email ?? "destinatario@correo.com";
 $higift_sender_name = $higift_sender_name ?? "Nombre (y apellido) del remitente";
 $higift_sender_lastname = $higift_sender_lastname ?? "Apellido remitente";
