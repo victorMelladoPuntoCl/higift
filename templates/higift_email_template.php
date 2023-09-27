@@ -35,4 +35,5 @@ function addEmailContentAfter() {
 <!-- Fin del Footer -->
     </body>
     ';
+    return $email_after_content;
 }
