@@ -34,5 +34,5 @@ function addEmailContentAfter() {
 </footer>
 <!-- Fin del Footer -->
     </body>
-    '
+    ';
 }
